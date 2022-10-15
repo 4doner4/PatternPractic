@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+@using Pattern_project.helpers
+@{
+    Client client = new Client();
+    Factorys factory1 = new Factorys(new ConcreteFactory1());
+    Factorys factory2 = new Factorys(new ConcreteFactory2());
+   
+
+    RealSubject realSubject = new RealSubject();
+    client.ClientCode(realSubject);
+
+    Proxy proxy = new Proxy(realSubject);
+    client.ClientCode(proxy);
+ }
+ 
+
+<h3>Прогеры</h3>
+    @factory1.showHtmlHelperA(Html)
+<br />
+<h3>Шифры</h3>
+    @factory1.showHtmlHelperB(Html)
+
+<br/>
+<h3>Кнопки</h3>
+@factory2.showHtmlHelperA(Html)
+<h3>Изображения</h3>
+@factory2.showHtmlHelperB(Html)
+
+
