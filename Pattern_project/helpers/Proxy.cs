@@ -2,14 +2,23 @@
 {
     public interface ISubject
     {
-        void Request();
+        string[] Request(int n);
     }
 
     class RealSubject : ISubject
     {
-        public void Request()
+        public string[] items1 = new string[] { "Аметов Дамир", "Еволенко Алексей", "Мендешев Темирлан" };
+        public string[] items2 = new string[] { "Атбаш", "Цезарь", "XOR", "ADFGX", "Вижинер" };
+        public string[] Request(int n)
         {
-            Console.WriteLine("RealSubject: Handling Request.");
+            if (n == 1)
+            {
+                return items1;
+            }
+            else
+            {
+                return items2;
+            }
         }
     }
 
@@ -22,34 +31,42 @@
             this._realSubject = realSubject;
         }
 
-        public void Request()
+        public string[] Request(int n)
         {
-            if (this.CheckAccess())
-            {
-                this._realSubject.Request();
-
-                this.LogAccess();
+            if (this.CheckAccess()) {
+                return this._realSubject.Request(n);
             }
+            else {
+                return null!;
+            };
         }
 
         public bool CheckAccess()
         {
-            Console.WriteLine("Proxy: Checking access prior to firing a real request.");
-
-            return true;
+            bool cheker = true;
+            foreach(string i in _realSubject.items1)
+            {
+                if (i.GetType() == typeof(string))
+                {
+                    cheker = true;
+                }
+                else
+                {
+                    cheker = false;
+                    break;
+                }
+            }
+            return cheker;
+           
         }
 
-        public void LogAccess()
-        {
-            Console.WriteLine("Proxy: Logging the time of request.");
-        }
     }
     public class Client
     {
-        public void ClientCode(ISubject subject)
+        public string[] ClientCode(ISubject subject, int n)
         {
 
-            subject.Request();
+            return subject.Request(n);
 
         }
 

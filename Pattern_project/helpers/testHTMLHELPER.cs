@@ -56,7 +56,14 @@ namespace Pattern_project.helpers
         }
         public static HtmlString ListForInformationProger(IHtmlHelper html)
         {
-            string[] items = new string[] { "Аметов Дамир", "Еволенко Алексей", "Мендешев Темирлан"};
+            RealSubject realSubject = new RealSubject();
+            Proxy proxy = new Proxy(realSubject);
+
+            Client client = new Client();
+
+            string[] items = client.ClientCode(proxy,1);
+
+
             string result = "<ul class=\"list-group list-group-flush\">"; ;
             foreach (string item in items)
             {
@@ -76,7 +83,13 @@ namespace Pattern_project.helpers
         }
         public static HtmlString ListForInformationCipher(IHtmlHelper html)
         {
-            string[] items = new string[] { "Атбаш", "Цезарь", "XOR", "ADFGX", "Вижинер" };
+            RealSubject realSubject = new RealSubject();
+            Proxy proxy = new Proxy(realSubject);
+
+            Client client = new Client();
+
+            string[] items = client.ClientCode(proxy, 2);
+
             string result = "<ul class=\"list-group list-group-flush\">";
             foreach (string item in items)
             {
